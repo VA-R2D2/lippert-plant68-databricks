@@ -52,8 +52,12 @@ if ($existingRemote -contains $RemoteName) {
 }
 
 Write-Host "Checking remote access..."
+$previousErrorActionPreference = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
 $remoteCheck = git ls-remote --heads $RemoteName 2>&1
-if ($LASTEXITCODE -ne 0) {
+$remoteCheckExitCode = $LASTEXITCODE
+$ErrorActionPreference = $previousErrorActionPreference
+if ($remoteCheckExitCode -ne 0) {
   Write-Host $remoteCheck
   Fail "GitHub repo was not reachable. Confirm the repo exists and that you have access: $RepoUrl"
 }
