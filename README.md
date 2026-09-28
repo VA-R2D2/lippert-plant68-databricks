@@ -30,7 +30,17 @@ This repository contains the readiness checklist, validation scripts, Databricks
 | `configs/example.env` | Non-secret configuration example |
 | `scripts/validate-prereqs.ps1` | Local prerequisite validation |
 | `scripts/validate-mcp-connectivity.ps1` | MCP endpoint reachability validation |
+| `notebooks/03_ingest_onprem_sql_api.py` | Template for ingesting on-prem SQL API data into Delta/Unity Catalog |
 | `notebooks` | Databricks smoke-test and validation notebooks |
+
+## Notebook Order
+
+1. `notebooks/01_workspace_smoke_test.py`
+2. `notebooks/02_unity_catalog_permissions.py`
+3. `notebooks/03_ingest_onprem_sql_api.py`
+4. `notebooks/03_sample_data_profile.py`
+5. `notebooks/04_kpi_validation.py`
+6. `notebooks/05_agent_grounding_validation.py`
 
 ## Security
 
