@@ -3,10 +3,11 @@
 | Done | Item | What We Need | Owner | Notes |
 | --- | --- | --- | --- | --- |
 | [ ] | Databricks workspace | Access to 1 existing DEV workspace, or provision 1 new DEV workspace if needed. Do not create a duplicate if an existing workspace is available. |  |  |
-| [ ] | On-premises SQL sources | Server/database details, required tables/views, schema documentation, and access to SQL APIs for the pipeline into the lakehouse. |  |  |
-| [ ] | Sample data | Source tables/views populated with approved sample data or sanitized extracts. Suggested scope: 1-2 weeks of representative data plus a current or simulated shift; confirm exact dates and timezone with the business owner. |  |  |
+| [ ] | On-premises SQL sources | Server/database details, required tables/views, schema documentation, approved SQL API endpoint URL, JSON records path, and access to SQL APIs for the pipeline into the lakehouse. |  |  |
+| [ ] | Sample data | Source tables/views populated with approved sample data or sanitized extracts. Suggested scope: 1-2 weeks of representative data plus a current or simulated shift; confirm exact start date, end date, and timezone with the business owner. |  |  |
 | [ ] | Databricks workspace permissions | Workshop team can create notebooks, pipelines, and compute within approved policies. |  |  |
-| [ ] | Unity Catalog permissions | Read approved source data and create temporary tables/views and other required data objects in a designated DEV catalog/schema. |  |  |
+| [ ] | Unity Catalog permissions | Read approved source data and create temporary tables/views and other required data objects in a designated DEV catalog/schema, including the agreed target Delta table for ingested sample data. |  |  |
+| [ ] | Databricks secret scope | Confirm an approved secret scope and secret key name exist for the SQL API token or supported credential. Do not store the token value in this repo. |  |  |
 | [ ] | Managed MCP servers | Enable the Managed MCP Servers preview in the DEV workspace; confirm availability and customer approval. |  |  |
 | [ ] | Databricks MCP authentication | Configure the supported OAuth flow and any required client credentials for the Foundry-to-Databricks connection. Keep credentials in approved secure storage; this is separate from UI/API sign-in. |  |  |
 | [ ] | MCP connectivity | Validate an authenticated call from the intended Foundry connection to the Databricks MCP endpoint and confirm access to the intended data/tools. |  |  |

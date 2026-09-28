@@ -16,9 +16,11 @@ This repository contains the readiness checklist, validation scripts, Databricks
 1. Clone this repo.
 2. Review `docs/prerequisites.md`.
 3. Copy values from `configs/example.env` into local environment variables or an approved secret store.
-4. Run the validation scripts in `scripts`.
-5. Import or sync notebooks from `notebooks` into the Databricks DEV workspace.
-6. Track gaps as GitHub issues using the readiness issue template.
+4. Confirm the SQL API token or credential is stored in the approved Databricks secret scope.
+5. Run the validation scripts in `scripts`.
+6. Import or sync notebooks from `notebooks` into the Databricks DEV workspace.
+7. Populate notebook widgets from `configs/example.env` and `docs/prerequisites.md`.
+8. Track gaps as GitHub issues using the readiness issue template.
 
 ## Key Files
 
