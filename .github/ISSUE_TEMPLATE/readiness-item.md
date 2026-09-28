@@ -15,6 +15,13 @@ labels: readiness
 
 ## Validation Steps
 
+## Current Status
+
+- [ ] Not started
+- [ ] In progress
+- [ ] Blocked
+- [ ] Ready
+
 ## Done Criteria
 
 - [ ] Access or artifact confirmed

@@ -12,4 +12,4 @@
 | [ ] | Databricks MCP authentication | Configure the supported OAuth flow and any required client credentials for the Foundry-to-Databricks connection. Keep credentials in approved secure storage; this is separate from UI/API sign-in. |  |  |
 | [ ] | MCP connectivity | Validate an authenticated call from the intended Foundry connection to the Databricks MCP endpoint and confirm access to the intended data/tools. |  |  |
 | [ ] | KPIs and business rules | List the measures to build, with formulas, thresholds, source fields, expected sample results, and a business owner available to validate them. |  |  |
-| [ ] | Agent reference documents | Approved SOPs/playbooks and their owners for agent grounding. |  |  |
+| [ ] | Agent reference documents | Approved SOPs/playbooks, owners, source URIs, approval status, and a metadata table/view for agent grounding validation. |  |  |

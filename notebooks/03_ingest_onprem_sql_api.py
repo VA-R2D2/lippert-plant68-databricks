@@ -72,9 +72,10 @@ if not records:
     raise ValueError("The source API returned zero records for the requested sample-data window.")
 
 df = spark.createDataFrame(records).withColumn("_ingested_at", current_timestamp())
+record_count = df.count()
 
-spark.sql(f"CREATE CATALOG IF NOT EXISTS `{target_catalog}`")
-spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{target_catalog}`.`{target_schema}`")
+spark.sql(f"USE CATALOG `{target_catalog}`")
+spark.sql(f"USE SCHEMA `{target_schema}`")
 
 target_name = f"`{target_catalog}`.`{target_schema}`.`{target_table}`"
 
@@ -86,5 +87,5 @@ target_name = f"`{target_catalog}`.`{target_schema}`.`{target_table}`"
     .saveAsTable(target_name)
 )
 
-print(f"Ingested {df.count()} records into {target_name}.")
+print(f"Ingested {record_count} records into {target_name}.")
 display(spark.table(target_name).limit(20))

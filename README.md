@@ -27,6 +27,7 @@ This repository contains the readiness checklist, validation scripts, Databricks
 | Path | Purpose |
 | --- | --- |
 | `docs/readiness-checklist.md` | Main workshop readiness checklist |
+| `docs/developer-runbook.md` | Step-by-step workflow for developers during the session |
 | `docs/prerequisites.md` | Access, tooling, and information needed before the session |
 | `docs/kpi-template.md` | Template for KPI and business-rule definitions |
 | `configs/example.env` | Non-secret configuration example |
@@ -40,9 +41,17 @@ This repository contains the readiness checklist, validation scripts, Databricks
 1. `notebooks/01_workspace_smoke_test.py`
 2. `notebooks/02_unity_catalog_permissions.py`
 3. `notebooks/03_ingest_onprem_sql_api.py`
-4. `notebooks/03_sample_data_profile.py`
-5. `notebooks/04_kpi_validation.py`
-6. `notebooks/05_agent_grounding_validation.py`
+4. `notebooks/04_sample_data_profile.py`
+5. `notebooks/05_kpi_validation.py`
+6. `notebooks/06_agent_grounding_validation.py`
+
+## Customer Handoff Checklist
+
+- Replace sample values in `configs/example.env` with customer-approved non-secret values.
+- Confirm all secrets are stored only in the approved Databricks secret scope.
+- Confirm the DEV workspace, catalog, schema, compute policy, and MCP preview approval.
+- Confirm source data is approved sample or sanitized data only.
+- Confirm open blockers are tracked as GitHub issues before the session starts.
 
 ## Security
 
