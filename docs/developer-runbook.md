@@ -5,8 +5,8 @@ Use this runbook after the repository is published and each developer has reposi
 ## 1. Clone the Repository
 
 ```powershell
-git clone https://github.com/ORG/databricks-vibe-coding-readiness.git
-cd databricks-vibe-coding-readiness
+git clone https://github.com/ORG/lippert-plant68-databricks.git
+cd lippert-plant68-databricks
 ```
 
 Replace `ORG` with the GitHub organization or account that owns the repository.
