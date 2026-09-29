@@ -10,11 +10,15 @@
 - Access to approved SQL source APIs or sanitized extracts.
 - Databricks secret scope access for the SQL API token or supported API credential.
 - Approval to use the Managed MCP Servers preview.
-- OAuth/client credential setup for Databricks MCP integration.
+- Foundry-managed OAuth access to the Databricks Genie MCP integration.
+- Foundry User access to use the toolbox and Foundry Project Manager access to manage its connection.
 
 ## Required Information
 
 - Databricks workspace URL.
+- Microsoft Foundry project endpoint.
+- Databricks Genie space MCP endpoint.
+- Foundry MCP connection and toolbox names.
 - DEV catalog name.
 - DEV schema name.
 - Target Delta table name for ingested sample data.

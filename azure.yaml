@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: lippert-plant68-databricks
+services:
+  proj-default:
+    host: azure.ai.project
+    endpoint: https://semanticsearchva.services.ai.azure.com/api/projects/proj-default
+infra:
+  provider: microsoft.foundry

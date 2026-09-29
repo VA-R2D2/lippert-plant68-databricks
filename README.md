@@ -29,6 +29,7 @@ This repository contains the readiness checklist, validation scripts, Databricks
 | `docs/readiness-checklist.md` | Main workshop readiness checklist |
 | `docs/developer-runbook.md` | Step-by-step workflow for developers during the session |
 | `docs/prerequisites.md` | Access, tooling, and information needed before the session |
+| `docs/session-prompts-2026-09-30.md` | Copy-ready prompts for the September 30 follow-up session |
 | `docs/kpi-template.md` | Template for KPI and business-rule definitions |
 | `configs/example.env` | Non-secret configuration example |
 | `scripts/validate-prereqs.ps1` | Local prerequisite validation |
