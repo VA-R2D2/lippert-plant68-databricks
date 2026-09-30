@@ -8,7 +8,7 @@ from pyspark.sql.functions import current_timestamp, lit
 
 VOLUME_PATH = "/Volumes/lippert68/default/production_scheduling_data"
 TARGET_CATALOG = "lippert68"
-TARGET_SCHEMA = "default"
+TARGET_SCHEMA = "bronze"
 HEADER_SCAN_ROWS = 25
 HEADER_LOOKAHEAD_ROWS = 5
 MIN_HEADER_CELLS = 2
@@ -150,15 +150,18 @@ for excel_file in excel_files:
             raise ValueError(f"Duplicate normalized table name: {table_name}")
         table_names.add(table_name)
 
+        source_row_numbers = [int(index) + 1 for index in frame.index]
         frame.columns = normalize_columns(list(frame.columns))
         frame = frame.where(pd.notna(frame), None)
         for column in frame.columns:
             frame[column] = frame[column].map(lambda value: None if value is None else str(value))
+        frame["__source_row_number"] = source_row_numbers
 
         spark_frame = (
             spark.createDataFrame(frame)
             .withColumn("__source_file", lit(excel_file.name))
             .withColumn("__source_sheet", lit(sheet_name))
+            .withColumn("__header_row", lit(header_excel_row))
             .withColumn("__ingested_at", current_timestamp())
         )
         full_table_name = f"`{TARGET_CATALOG}`.`{TARGET_SCHEMA}`.`{table_name}`"

@@ -72,6 +72,11 @@ Run these notebooks in the Databricks DEV workspace:
 4. `notebooks/04_sample_data_profile.py`
 5. `notebooks/05_kpi_validation.py`
 6. `notebooks/06_agent_grounding_validation.py`
+7. `notebooks/07_excel_volume_to_tables.py`
+8. `notebooks/08_bronze_to_silver.py`
+9. `notebooks/09_silver_to_gold.py`
+
+Notebooks 07-09 implement the Excel medallion pipeline. Notebook 07 writes raw-string data and source lineage to `lippert68.bronze`, notebook 08 cleans and deduplicates into `lippert68.silver`, and notebook 09 publishes the operational dataset inventory to `lippert68.gold`. Add business KPI Gold tables only after their formulas and source fields are approved in `docs/kpi-template.md`.
 
 ## 7. Widget Mapping
 

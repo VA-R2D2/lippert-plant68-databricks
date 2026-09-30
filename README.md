@@ -35,6 +35,9 @@ This repository contains the readiness checklist, validation scripts, Databricks
 | `scripts/validate-prereqs.ps1` | Local prerequisite validation |
 | `scripts/validate-mcp-connectivity.ps1` | MCP endpoint reachability validation |
 | `notebooks/03_ingest_onprem_sql_api.py` | Template for ingesting on-prem SQL API data into Delta/Unity Catalog |
+| `notebooks/07_excel_volume_to_tables.py` | Detect Excel headers and load raw Bronze Delta tables |
+| `notebooks/08_bronze_to_silver.py` | Clean and deduplicate Bronze tables into Silver |
+| `notebooks/09_silver_to_gold.py` | Publish the Gold production-scheduling dataset inventory |
 | `notebooks` | Databricks smoke-test and validation notebooks |
 
 ## Notebook Order
@@ -45,6 +48,9 @@ This repository contains the readiness checklist, validation scripts, Databricks
 4. `notebooks/04_sample_data_profile.py`
 5. `notebooks/05_kpi_validation.py`
 6. `notebooks/06_agent_grounding_validation.py`
+7. `notebooks/07_excel_volume_to_tables.py`
+8. `notebooks/08_bronze_to_silver.py`
+9. `notebooks/09_silver_to_gold.py`
 
 ## Customer Handoff Checklist
 
