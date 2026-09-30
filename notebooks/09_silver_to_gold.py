@@ -11,17 +11,29 @@ from pyspark.sql.types import (
     TimestampType,
 )
 
-SOURCE_CATALOG = "lippert68"
+SOURCE_CATALOG = "lipperttech_dev"
 SOURCE_SCHEMA = "silver"
-TARGET_CATALOG = "lippert68"
+TARGET_CATALOG = "lipperttech_dev"
 TARGET_SCHEMA = "gold"
 TARGET_TABLE = "production_scheduling_dataset_inventory"
+DEFAULT_SILVER_ROOT = "abfss://silver@stltdapdatalakeslvrdeus.dfs.core.windows.net/microsoft_sample"
+DEFAULT_GOLD_ROOT = "abfss://gold@stltdapdatalakegolddeus.dfs.core.windows.net/microsoft_sample"
 
-dbutils.widgets.text("gold_storage_root", "")
-GOLD_STORAGE_ROOT = dbutils.widgets.get("gold_storage_root").strip().rstrip("/")
+dbutils.widgets.text("silver_storage_root", DEFAULT_SILVER_ROOT)
+SILVER_STORAGE_ROOT = (
+    dbutils.widgets.get("silver_storage_root").strip().rstrip("/")
+    or DEFAULT_SILVER_ROOT
+)
+dbutils.widgets.text("gold_storage_root", DEFAULT_GOLD_ROOT)
+GOLD_STORAGE_ROOT = (
+    dbutils.widgets.get("gold_storage_root").strip().rstrip("/")
+    or DEFAULT_GOLD_ROOT
+)
 
-if not GOLD_STORAGE_ROOT:
-    raise ValueError("Set gold_storage_root to the approved Gold storage path.")
+if not SILVER_STORAGE_ROOT or not GOLD_STORAGE_ROOT:
+    raise ValueError(
+        "Set silver_storage_root and gold_storage_root to the approved ADLS paths."
+    )
 
 
 def qualified_name(catalog: str, schema: str, table: str) -> str:
@@ -66,6 +78,10 @@ inventory_rows = []
 
 for table_name in source_tables:
     source_name = qualified_name(SOURCE_CATALOG, SOURCE_SCHEMA, table_name)
+    source_path = f"{SILVER_STORAGE_ROOT}/{table_name}"
+    validate_table_location(
+        SOURCE_CATALOG, SOURCE_SCHEMA, table_name, source_path
+    )
     frame = spark.table(source_name)
     columns = set(frame.columns)
 

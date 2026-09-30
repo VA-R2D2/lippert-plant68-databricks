@@ -10,15 +10,15 @@
 - Access to approved SQL source APIs or sanitized extracts.
 - Databricks secret scope access for the SQL API token or supported API credential.
 - Approval to use the Managed MCP Servers preview.
-- Foundry-managed OAuth access to the Databricks Genie MCP integration.
+- Foundry-managed OAuth access to the Databricks SQL MCP server.
 - Foundry User access to use the toolbox and Foundry Project Manager access to manage its connection.
 
 ## Required Information
 
 - Databricks workspace URL.
 - Microsoft Foundry project endpoint.
-- Databricks Genie space MCP endpoint.
-- Foundry MCP connection and toolbox names.
+- Databricks SQL MCP endpoint.
+- Foundry MCP connection name.
 - Approved, non-overlapping ADLS storage roots for Bronze, Silver, and Gold.
 - Unity Catalog external locations covering each storage root, with `READ FILES`, `WRITE FILES`, and `CREATE EXTERNAL TABLE` permissions for the pipeline identity.
 - DEV catalog name.

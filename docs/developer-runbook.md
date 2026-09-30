@@ -41,7 +41,12 @@ $env:SAMPLE_DATA_END_DATE="2026-09-27"
 $env:SAMPLE_DATA_TIMEZONE="America/Chicago"
 $env:DATABRICKS_SECRET_SCOPE="approved-secret-scope"
 $env:DATABRICKS_TOKEN_SECRET_KEY="sql-api-token"
-$env:MCP_ENDPOINT_URL="https://your-databricks-mcp-endpoint"
+$env:MCP_ENDPOINT_URL="https://adb-5855619044563885.5.azuredatabricks.net/api/2.0/mcp/sql"
+$env:MCP_AUTH_MODE="oauth"
+$env:MCP_OAUTH_SCOPE="sql"
+$env:MCP_TARGET_CATALOG="lipperttech_dev"
+$env:MCP_TARGET_SCHEMA="gold"
+$env:MCP_TARGET_TABLE="production_scheduling_dataset_inventory"
 ```
 
 ## 4. Validate Local Readiness
