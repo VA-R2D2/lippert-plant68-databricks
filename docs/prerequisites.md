@@ -19,6 +19,8 @@
 - Microsoft Foundry project endpoint.
 - Databricks Genie space MCP endpoint.
 - Foundry MCP connection and toolbox names.
+- Approved, non-overlapping ADLS storage roots for Bronze, Silver, and Gold.
+- Unity Catalog external locations covering each storage root, with `READ FILES`, `WRITE FILES`, and `CREATE EXTERNAL TABLE` permissions for the pipeline identity.
 - DEV catalog name.
 - DEV schema name.
 - Target Delta table name for ingested sample data.
@@ -59,6 +61,16 @@ The notebook `notebooks/03_ingest_onprem_sql_api.py` requires these Databricks w
 4. `notebooks/04_sample_data_profile.py`
 5. `notebooks/05_kpi_validation.py`
 6. `notebooks/06_agent_grounding_validation.py`
+
+## Medallion Storage Inputs
+
+The Excel medallion notebooks require separate physical storage roots. Do not reuse or nest one layer's path beneath another layer.
+
+| Widget | Used By | Example |
+| --- | --- | --- |
+| `bronze_storage_root` | `notebooks/07_excel_volume_to_tables.py` | `abfss://bronze@storage-account.dfs.core.windows.net/lippert68` |
+| `silver_storage_root` | `notebooks/08_bronze_to_silver.py` | `abfss://silver@storage-account.dfs.core.windows.net/lippert68` |
+| `gold_storage_root` | `notebooks/09_silver_to_gold.py` | `abfss://gold@storage-account.dfs.core.windows.net/lippert68` |
 
 ## Do Not Commit
 

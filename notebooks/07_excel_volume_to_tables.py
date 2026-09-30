@@ -15,6 +15,12 @@ MIN_HEADER_CELLS = 2
 MIN_HEADER_TEXT_RATIO = 0.6
 MIN_HEADER_UNIQUE_RATIO = 0.8
 
+dbutils.widgets.text("bronze_storage_root", "")
+BRONZE_STORAGE_ROOT = dbutils.widgets.get("bronze_storage_root").strip().rstrip("/")
+
+if not BRONZE_STORAGE_ROOT:
+    raise ValueError("Set bronze_storage_root to the approved Bronze storage path.")
+
 
 def normalize_identifier(value: str, fallback: str) -> str:
     identifier = re.sub(r"[^a-zA-Z0-9_]+", "_", value.strip()).strip("_").lower()
@@ -24,6 +30,31 @@ def normalize_identifier(value: str, fallback: str) -> str:
     if identifier[0].isdigit():
         identifier = f"col_{identifier}"
     return identifier
+
+
+def qualified_name(catalog: str, schema: str, table: str) -> str:
+    escaped = [value.replace("`", "``") for value in (catalog, schema, table)]
+    return ".".join(f"`{value}`" for value in escaped)
+
+
+def validate_table_location(
+    catalog: str, schema: str, table: str, expected_path: str
+) -> None:
+    table_name = f"{catalog}.{schema}.{table}"
+    if not spark.catalog.tableExists(table_name):
+        return
+
+    qualified_table = qualified_name(catalog, schema, table)
+    actual_path = (
+        spark.sql(f"DESCRIBE DETAIL {qualified_table}")
+        .select("location")
+        .first()["location"]
+        .rstrip("/")
+    )
+    if actual_path != expected_path:
+        raise ValueError(
+            f"{table_name} is registered at {actual_path}, not {expected_path}."
+        )
 
 
 def normalize_columns(columns: list[object]) -> list[str]:
@@ -164,12 +195,17 @@ for excel_file in excel_files:
             .withColumn("__header_row", lit(header_excel_row))
             .withColumn("__ingested_at", current_timestamp())
         )
-        full_table_name = f"`{TARGET_CATALOG}`.`{TARGET_SCHEMA}`.`{table_name}`"
+        full_table_name = qualified_name(TARGET_CATALOG, TARGET_SCHEMA, table_name)
+        table_path = f"{BRONZE_STORAGE_ROOT}/{table_name}"
+        validate_table_location(
+            TARGET_CATALOG, TARGET_SCHEMA, table_name, table_path
+        )
         (
             spark_frame.write
             .format("delta")
             .mode("overwrite")
             .option("overwriteSchema", "true")
+            .option("path", table_path)
             .saveAsTable(full_table_name)
         )
         summary.append(
@@ -178,6 +214,7 @@ for excel_file in excel_files:
                 "source_sheet": sheet_name,
                 "detected_header_row": header_excel_row,
                 "table": f"{TARGET_CATALOG}.{TARGET_SCHEMA}.{table_name}",
+                "storage_path": table_path,
                 "rows": spark_frame.count(),
                 "columns": len(spark_frame.columns),
             }

@@ -29,6 +29,9 @@ $env:DATABRICKS_CATALOG="dev_catalog"
 $env:DATABRICKS_SCHEMA="workshop_schema"
 $env:DATABRICKS_TARGET_TABLE="approved_sample_source_data"
 $env:REFERENCE_DOCUMENT_TABLE="dev_catalog.workshop_schema.approved_reference_documents"
+$env:BRONZE_STORAGE_ROOT="abfss://bronze@storage-account.dfs.core.windows.net/lippert68"
+$env:SILVER_STORAGE_ROOT="abfss://silver@storage-account.dfs.core.windows.net/lippert68"
+$env:GOLD_STORAGE_ROOT="abfss://gold@storage-account.dfs.core.windows.net/lippert68"
 $env:SQL_SOURCE_NAME="source_system_name"
 $env:SQL_DATABASE_NAME="database_name"
 $env:SQL_SOURCE_API_URL="https://approved-api-host.example.com/api/source-data"
@@ -98,6 +101,9 @@ Use this mapping when filling Databricks notebook widgets:
 | `records_json_path` | `SQL_RECORDS_JSON_PATH` |
 | `source_table` | Fully qualified target table, for example `dev_catalog.workshop_schema.approved_sample_source_data` |
 | `reference_document_table` | `REFERENCE_DOCUMENT_TABLE` |
+| `bronze_storage_root` | `BRONZE_STORAGE_ROOT` |
+| `silver_storage_root` | `SILVER_STORAGE_ROOT` |
+| `gold_storage_root` | `GOLD_STORAGE_ROOT` |
 
 For KPI validation, populate `kpi_name`, `kpi_sql_expression`, and `expected_result` from the completed KPI template in `docs/kpi-template.md`.
 
